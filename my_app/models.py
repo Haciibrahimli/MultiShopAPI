@@ -1,4 +1,10 @@
 from django.db import models
+from services.mixin import SlugMixin, DateMixin
+from services.generator import Generator
+from services.uploader import Uploader
+from django.contrib.auth import get_user_model 
+from services.extract import extract_google_maps_url_from_iframe
+
 
 SOCIAL_CHOICES = (
     ("insta", "Instagram"),
@@ -9,7 +15,7 @@ SOCIAL_CHOICES = (
     ("tiktok", "Tiktok")
 )
 
-
+User = get_user_model()
 
 
 
@@ -75,7 +81,7 @@ class Size(models.Model):
  
 
 
-class Product(models.Model):
+class Product(SlugMixin, DateMixin):
      category = models.ForeignKey(Category,on_delete = models.SET_NULL,null = True,blank = True)
      name = models.CharField(max_length = 255,verbose_name = 'mehsulun adi')
      price = models.FloatField(verbose_name ='mehsulun qiymeti')
@@ -102,7 +108,7 @@ class Product(models.Model):
     # chekout modeli
     # base.html
         
-class Partniors(models.Model):
+class Partniors(DateMixin):
       image = models.ImageField(upload_to=Uploader.upload_photo_partniors,null=True,blank=True)
       
       def __str__(self):
@@ -114,7 +120,7 @@ class Partniors(models.Model):
        verbose_name_plural = 'partnior sekiller'
 
 
-class Contact(models.Model):
+class Contact(SlugMixin, DateMixin):
        
     name = models.CharField(max_length=255,verbose_name='ad ve soyad')
     email = models.CharField(max_length=255,verbose_name='email adress')
@@ -134,7 +140,7 @@ class Contact(models.Model):
 
 
 
-class Checkout(models.Model):
+class Checkout(SlugMixin, DateMixin):
        name = models.CharField(max_length = 255,verbose_name = 'ad')
        surname = models.CharField(max_length = 255,verbose_name = 'soyad')
        email = models.CharField(max_length = 255,verbose_name = 'email')
@@ -157,7 +163,7 @@ class Checkout(models.Model):
 
  
 
-class ProductImage(models.Model):
+class ProductImage(SlugMixin, DateMixin):
        product = models.ForeignKey(Product,on_delete = models.SET_NULL,null = True,blank = True)
 
        def __str__(self):
@@ -170,7 +176,8 @@ class ProductImage(models.Model):
 
 
 
-class Comment(models.Model):
+
+class Comment(DateMixin):
     text = models.TextField(verbose_name="User's comment")
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     products = models.ForeignKey(Product,on_delete=models.SET_NULL, null=True, blank=True)
@@ -185,10 +192,10 @@ class Comment(models.Model):
 
    
 
-class SpecialOffer(models.Model):
+class SpecialOffer(SlugMixin, DateMixin):
     text = models.TextField(verbose_name="metn")
     discount = models.TextField(verbose_name = 'endirim')
-    # image = models.ImageField(upload_to=Uploader.upload_photo_special_offer,null=True,blank=True)  ????
+    image = models.ImageField(upload_to=Uploader.upload_photo_special_offer,null=True,blank=True)
 
     def __str__(self):
         return self.discount
@@ -198,9 +205,14 @@ class SpecialOffer(models.Model):
         verbose_name = "xususi teklif"
         verbose_name_plural = "xususi teklifler"
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+         self.slug = Generator.create_slug_shortcode(size=10, model_=SpecialOffer)
+        super(SpecialOffer, self).save(*args, **kwargs)
 
-class Slider(models.Model):
-    #    image = models.ImageField(upload_to=Uploader.upload_photo_slider,null=True,blank=True)
+
+class Slider(SlugMixin, DateMixin):
+       image = models.ImageField(upload_to=Uploader.upload_photo_slider,null=True,blank=True)
        title = models.CharField(max_length = 255, verbose_name = 'basliq')
        text = models.TextField(verbose_name="metn")
 
@@ -212,8 +224,13 @@ class Slider(models.Model):
         verbose_name = 'slider'
         verbose_name_plural = 'sliders'
 
+       def save(self, *args, **kwargs):
+        if not self.slug:
+         self.slug = Generator.create_slug_shortcode(size=10, model_=Slider)
+        super(Slider, self).save(*args, **kwargs)
 
-class Basket(models.Model):
+
+class Basket(SlugMixin, DateMixin):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     products = models.ForeignKey(Product,on_delete=models.SET_NULL, null=True, blank=True)
     count = models.IntegerField()
@@ -227,9 +244,14 @@ class Basket(models.Model):
         verbose_name = "sebet"
         verbose_name_plural = "sebetler"
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+         self.slug = Generator.create_slug_shortcode(size=10, model_=Basket)
+        super(Basket, self).save(*args, **kwargs)
+
    
         
-class SignUp(models.Model):
+class SignUp(DateMixin):
     email = models.CharField(max_length = 255,verbose_name = 'email')
 
     def __str__(self):
@@ -237,7 +259,7 @@ class SignUp(models.Model):
     
 
 
-class SosialMedia(models.Model):
+class SosialMedia(SlugMixin, DateMixin):
     sosial_name = models.CharField(max_length=255,verbose_name='sosial media hesabi',choices=SOCIAL_CHOICES)
     sosial_link = models.TextField(verbose_name='sosial media linki')
 
@@ -249,10 +271,15 @@ class SosialMedia(models.Model):
         verbose_name = "sosial media hesabi"
         verbose_name_plural = "sosial media hesablari"
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+         self.slug = Generator.create_slug_shortcode(size=10, model_=SosialMedia)
+        super(SosialMedia, self).save(*args, **kwargs)
 
 
 
-class MainDetails(models.Model):
+
+class MainDetails(SlugMixin, DateMixin):
     email = models.EmailField(verbose_name='Email')
     adresss = models.CharField(max_length=255,verbose_name='adress' )
     phones = models.CharField(max_length=255,verbose_name='phones')
@@ -266,3 +293,9 @@ class MainDetails(models.Model):
         ordering = ("-created_at", )
         verbose_name = "elaqe melumati"
         verbose_name_plural = "elaqe melumatlari"
+
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
+        super(MainDetails, self).save(*args, **kwargs)

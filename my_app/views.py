@@ -26,76 +26,56 @@ class ProductRetrieveAPIView(RetrieveAPIView):
     serializer_class = ProductSerializer
     lookup_field = 'id'
 
-class GYMDestroyAPIView(DestroyAPIView):
-    queryset = GYM.objects.all()
-    serializer_class = GYMSerializer
+class PartniorsDestroyAPIView(DestroyAPIView):
+    queryset = Partniors.objects.all()
+    serializer_class = PartniorsSerializer
     lookup_field = 'id'
 
-class TrainerListView(ListAPIView):
-    queryset = Trainer.objects.all()
-    serializer_class = TrainerSerializer
+class ContactListView(ListAPIView):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
 
-class TrainerCreateAPIView(CreateAPIView):
-    queryset = Trainer.objects.all()
-    serializer_class = TrainerSerializer
+class CheckoutCreateAPIView(CreateAPIView):
+    queryset = Checkout.objects.all()
+    serializer_class = CheckoutSerializer
 
-class TrainerUpdateAPIView(UpdateAPIView):
-    queryset = Trainer.objects.all()
-    serializer_class = TrainerSerializer
+class ProductUpdateAPIView(UpdateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
     lookup_field = 'id'
 
-class TrainerRetrieveAPIView(RetrieveAPIView):
-    queryset = Trainer.objects.all()
-    serializer_class = TrainerSerializer
+class CommentRetrieveAPIView(RetrieveAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
     lookup_field = 'id'
 
-class TrainerDestroyAPIView(DestroyAPIView):
-    queryset = Trainer.objects.all()
-    serializer_class = GYMSerializer
+class SpecialOfferDestroyAPIView(DestroyAPIView):
+    queryset = SpecialOffer.objects.all()
+    serializer_class = SpecialOfferSerializer
     lookup_field = 'id'
 
-class ClientListView(ListAPIView):
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
+# class SliderOfferListView(ListAPIView):
+#     queryset = SliderOffer.objects.all()
+#     serializer_class = SliderOfferSerializer
 
-class ClientCreateAPIView(CreateAPIView):
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
+class BasketCreateAPIView(CreateAPIView):
+    queryset =Basket.objects.all()
+    serializer_class =BasketSerializer
 
-class ClientUpdateAPIView(UpdateAPIView):
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
+class SosialMediaUpdateAPIView(UpdateAPIView):
+    queryset = SosialMedia.objects.all()
+    serializer_class = SosialMediaSerializer
     lookup_field = 'id'
 
-class ClientRetrieveAPIView(RetrieveAPIView):
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
+# class ClientRetrieveAPIView(RetrieveAPIView):
+#     queryset = Client.objects.all()
+#     serializer_class = ClientSerializer
+#     lookup_field = 'id'
+
+class MainDetailsDestroyAPIView(DestroyAPIView):
+    queryset = MainDetails.objects.all()
+    serializer_class = MainDetailsSerializer
     lookup_field = 'id'
 
-class ClientDestroyAPIView(DestroyAPIView):
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
-    lookup_field = 'id'
 
-class WorkoutSessionListView(ListAPIView):
-    queryset = WorkoutSession.objects.all()
-    serializer_class = WorkoutSessionSerializer
 
-class WorkoutSessionCreateAPIView(CreateAPIView):
-    queryset = WorkoutSession.objects.all()
-    serializer_class = WorkoutSessionSerializer
-
-class WorkoutSessionUpdateAPIView(UpdateAPIView):
-    queryset = WorkoutSession.objects.all()
-    serializer_class = WorkoutSessionSerializer
-    lookup_field = 'id'
-
-class WorkoutSessionRetrieveAPIView(RetrieveAPIView):
-    queryset = WorkoutSession.objects.all()
-    serializer_class = WorkoutSessionSerializer
-    lookup_field = 'id'
-
-class WorkoutSessionDestroyAPIView(DestroyAPIView):
-    queryset = WorkoutSession.objects.all()
-    serializer_class = WorkoutSessionSerializer
-    lookup_field = 'id'

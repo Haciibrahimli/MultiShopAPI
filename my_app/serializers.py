@@ -79,7 +79,7 @@ class BasketSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class SSosialMediaerializer(serializers.ModelSerializer):
+class SosialMediaSerializer(serializers.ModelSerializer):
   
     class Meta:
         model = SosialMedia
