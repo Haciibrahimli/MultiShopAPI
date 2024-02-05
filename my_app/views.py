@@ -6,6 +6,9 @@ from rest_framework.generics import (ListAPIView, RetrieveAPIView,
 
 from my_app.models import *
 from my_app.serializers import *
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class CategoryListView(ListAPIView):
@@ -54,9 +57,9 @@ class SpecialOfferDestroyAPIView(DestroyAPIView):
     serializer_class = SpecialOfferSerializer
     lookup_field = 'id'
 
-# class SliderOfferListView(ListAPIView):
-#     queryset = SliderOffer.objects.all()
-#     serializer_class = SliderOfferSerializer
+class SpecialOfferListView(ListAPIView):
+    queryset = SpecialOffer.objects.all()
+    serializer_class = SpecialOfferSerializer
 
 class BasketCreateAPIView(CreateAPIView):
     queryset =Basket.objects.all()
@@ -67,10 +70,10 @@ class SosialMediaUpdateAPIView(UpdateAPIView):
     serializer_class = SosialMediaSerializer
     lookup_field = 'id'
 
-# class ClientRetrieveAPIView(RetrieveAPIView):
-#     queryset = Client.objects.all()
-#     serializer_class = ClientSerializer
-#     lookup_field = 'id'
+class ClientRetrieveAPIView(RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = 'id'
 
 class MainDetailsDestroyAPIView(DestroyAPIView):
     queryset = MainDetails.objects.all()

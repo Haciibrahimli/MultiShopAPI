@@ -1,6 +1,13 @@
 from rest_framework import serializers
 from my_app.models import *
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -62,13 +69,6 @@ class SpecialOfferSerializer(serializers.ModelSerializer):
   
     class Meta:
         model = SpecialOffer 
-        fields = "__all__"
-
-
-class SliderOfferSerializer(serializers.ModelSerializer):
-  
-    class Meta:
-        model = Slider 
         fields = "__all__"
 
 
