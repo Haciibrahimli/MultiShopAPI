@@ -14,12 +14,14 @@ User = get_user_model()
 class CategoryListView(ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    lookup_field = 'id'
 
-class ColorCreateAPIView(CreateAPIView):
+class ColorListAPIView(ListAPIView):
     queryset = Color.objects.all()
     serializer_class = ColorSerializer
+    lookup_field = 'id'
 
-class SizeUpdateAPIView(UpdateAPIView):
+class SizeListAPIView(ListAPIView):
     queryset = Size.objects.all()
     serializer_class = SizeSerializer
     lookup_field = 'id'
@@ -29,7 +31,7 @@ class ProductRetrieveAPIView(RetrieveAPIView):
     serializer_class = ProductSerializer
     lookup_field = 'id'
 
-class PartniorsDestroyAPIView(DestroyAPIView):
+class PartniorsListAPIView(ListAPIView):
     queryset = Partniors.objects.all()
     serializer_class = PartniorsSerializer
     lookup_field = 'id'
@@ -42,12 +44,12 @@ class CheckoutCreateAPIView(CreateAPIView):
     queryset = Checkout.objects.all()
     serializer_class = CheckoutSerializer
 
-class ProductUpdateAPIView(UpdateAPIView):
+class ProductCreateAPIView(CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'id'
 
-class CommentRetrieveAPIView(RetrieveAPIView):
+class CommentCreateAPIView(CreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     lookup_field = 'id'
@@ -57,7 +59,7 @@ class SpecialOfferDestroyAPIView(DestroyAPIView):
     serializer_class = SpecialOfferSerializer
     lookup_field = 'id'
 
-class SpecialOfferListView(ListAPIView):
+class SpecialOfferUpdateAPIView(UpdateAPIView):
     queryset = SpecialOffer.objects.all()
     serializer_class = SpecialOfferSerializer
 
@@ -75,7 +77,7 @@ class ClientRetrieveAPIView(RetrieveAPIView):
     serializer_class = UserSerializer
     lookup_field = 'id'
 
-class MainDetailsDestroyAPIView(DestroyAPIView):
+class MainDetailsRetrieveAPIView(DestroyAPIView):
     queryset = MainDetails.objects.all()
     serializer_class = MainDetailsSerializer
     lookup_field = 'id'
