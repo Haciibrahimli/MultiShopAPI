@@ -32,7 +32,7 @@ COUNTRY_CHOICES = (
 
 
 # Create your models here.
-class Category(models.Model):
+class Category(SlugMixin, DateMixin):
     name = models.CharField(max_length = 255,verbose_name = 'adi')
 
 
@@ -46,13 +46,19 @@ class Category(models.Model):
      verbose_name_plural = 'categories'
 
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
+        super(MainDetails, self).save(*args, **kwargs)
 
 
 
 
 
 
-class Color(models.Model):
+
+
+class Color(SlugMixin, DateMixin):
       name = models.TextField(verbose_name = 'mehsulun rengi')
 
 
@@ -65,9 +71,15 @@ class Color(models.Model):
        verbose_name_plural = 'rengler'
 
 
+      def save(self, *args, **kwargs):
+        if not self.slug:
+         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
+        super(MainDetails, self).save(*args, **kwargs)
+
+
         
 
-class Size(models.Model):
+class Size(SlugMixin, DateMixin):
       name = models.TextField(verbose_name = 'mehsulun olcusu')
 
       def __str__(self):
@@ -77,6 +89,12 @@ class Size(models.Model):
        ordering = ('-created_at',)
        verbose_name = 'olcu'
        verbose_name_plural = 'olculer'
+
+
+    #    def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #      self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
+    #     super(MainDetails, self).save(*args, **kwargs)
 
  
 
@@ -100,6 +118,12 @@ class Product(SlugMixin, DateMixin):
        ordering = ('-created_at',)
        verbose_name = 'mehsul'
        verbose_name_plural = 'mehsullar'
+
+
+     def save(self, *args, **kwargs):
+        if not self.slug:
+         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
+        super(MainDetails, self).save(*args, **kwargs)
 
     
 
@@ -140,6 +164,13 @@ class Contact(SlugMixin, DateMixin):
 
 
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
+        super(MainDetails, self).save(*args, **kwargs)
+
+
+
 class Checkout(SlugMixin, DateMixin):
        name = models.CharField(max_length = 255,verbose_name = 'ad')
        surname = models.CharField(max_length = 255,verbose_name = 'soyad')
@@ -159,6 +190,12 @@ class Checkout(SlugMixin, DateMixin):
         ordering = ('name',)
         verbose_name = 'checkout'
         verbose_name_plural = 'checkout'
+
+
+       def save(self, *args, **kwargs):
+        if not self.slug:
+         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
+        super(MainDetails, self).save(*args, **kwargs)
         
 
  
@@ -174,6 +211,10 @@ class ProductImage(SlugMixin, DateMixin):
         verbose_name = 'mehsul shekili'
         verbose_name_plural = 'mehsul shekilleri'
 
+       def save(self, *args, **kwargs):
+        if not self.slug:
+         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
+        super(MainDetails, self).save(*args, **kwargs)
 
 
 
@@ -211,7 +252,7 @@ class SpecialOffer(SlugMixin, DateMixin):
         super(SpecialOffer, self).save(*args, **kwargs)
 
 
-class Slider(SlugMixin, DateMixin):
+class Slider(DateMixin):
        image = models.ImageField(upload_to=Uploader.upload_photo_slider,null=True,blank=True)
        title = models.CharField(max_length = 255, verbose_name = 'basliq')
        text = models.TextField(verbose_name="metn")
@@ -223,11 +264,6 @@ class Slider(SlugMixin, DateMixin):
         ordering = ('-created_at',)
         verbose_name = 'slider'
         verbose_name_plural = 'sliders'
-
-       def save(self, *args, **kwargs):
-        if not self.slug:
-         self.slug = Generator.create_slug_shortcode(size=10, model_=Slider)
-        super(Slider, self).save(*args, **kwargs)
 
 
 class Basket(SlugMixin, DateMixin):
@@ -259,7 +295,7 @@ class SignUp(DateMixin):
     
 
 
-class SosialMedia(SlugMixin, DateMixin):
+class SosialMedia(DateMixin):
     sosial_name = models.CharField(max_length=255,verbose_name='sosial media hesabi',choices=SOCIAL_CHOICES)
     sosial_link = models.TextField(verbose_name='sosial media linki')
 
@@ -270,13 +306,6 @@ class SosialMedia(SlugMixin, DateMixin):
         ordering = ("sosial_name", )
         verbose_name = "sosial media hesabi"
         verbose_name_plural = "sosial media hesablari"
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-         self.slug = Generator.create_slug_shortcode(size=10, model_=SosialMedia)
-        super(SosialMedia, self).save(*args, **kwargs)
-
-
 
 
 class MainDetails(SlugMixin, DateMixin):

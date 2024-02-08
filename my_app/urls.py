@@ -2,9 +2,9 @@ from django.urls import path
 from my_app.views import *
 
 urlpatterns = [
-    path("",CategoryListView.as_view(), name='category-list'),
-    path("color/create/<id>", ColorListAPIView.as_view(), name='color-list'),
-    path("size/update/<id>", SizeListAPIView.as_view(), name='size-update'),
+    path("create/category/<id>",CategoryCreateAPIView.as_view(), name='category-list'),
+    path("color/create/<id>", ColorCreateAPIView.as_view(), name='color-list'),
+    path("size/update", SizeCreateAPIView.as_view(), name='size-update'),
     path("product/retrieve/<id>", ProductRetrieveAPIView.as_view(), name='product-retrieve'),
     path("partnior/destroy/<id>",PartniorsListAPIView.as_view(), name='partnior-destroy'),
     path("contact/list",ContactListView.as_view(), name='contact-list'),

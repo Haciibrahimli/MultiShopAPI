@@ -11,20 +11,20 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class CategoryListView(ListAPIView):
+class CategoryCreateAPIView(CreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    lookup_field = 'id'
+    # lookup_field = 'id'
 
-class ColorListAPIView(ListAPIView):
+class ColorCreateAPIView(CreateAPIView):
     queryset = Color.objects.all()
     serializer_class = ColorSerializer
-    lookup_field = 'id'
+    # lookup_field = 'id'
 
-class SizeListAPIView(ListAPIView):
+class SizeCreateAPIView(CreateAPIView):
     queryset = Size.objects.all()
     serializer_class = SizeSerializer
-    lookup_field = 'id'
+    # lookup_field = 'id'
 
 class ProductRetrieveAPIView(RetrieveAPIView):
     queryset =Product.objects.all()
