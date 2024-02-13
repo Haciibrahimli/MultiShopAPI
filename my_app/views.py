@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.permissions import AllowAny
 from rest_framework.generics import (ListAPIView, RetrieveAPIView,
                                      ListCreateAPIView, CreateAPIView,
                                      UpdateAPIView,DestroyAPIView)
@@ -14,17 +15,18 @@ User = get_user_model()
 class CategoryCreateAPIView(CreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    # lookup_field = 'id'
+    permission_classes = [AllowAny]
 
 class ColorCreateAPIView(CreateAPIView):
     queryset = Color.objects.all()
     serializer_class = ColorSerializer
-    # lookup_field = 'id'
+    permission_classes = [AllowAny]
 
 class SizeCreateAPIView(CreateAPIView):
     queryset = Size.objects.all()
     serializer_class = SizeSerializer
-    # lookup_field = 'id'
+    permission_classes = [AllowAny]
+   
 
 class ProductRetrieveAPIView(RetrieveAPIView):
     queryset =Product.objects.all()
@@ -43,16 +45,33 @@ class ContactListView(ListAPIView):
 class CheckoutCreateAPIView(CreateAPIView):
     queryset = Checkout.objects.all()
     serializer_class = CheckoutSerializer
+    permission_classes = [AllowAny]
 
-class ProductCreateAPIView(CreateAPIView):
+class ProductCreateAPIView(CreateAPIView): #CreateApi ce ListApi de  "id" lazim deyil
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [AllowAny]
+   
+
+class ProductDestroyAPIView(DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'id'
 
+class ProducRetrieveAPIView(RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'id'
+    
+class ProductListAPIView(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+  
+
 class CommentCreateAPIView(CreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    lookup_field = 'id'
+    permission_classes = [AllowAny]
 
 class SpecialOfferDestroyAPIView(DestroyAPIView):
     queryset = SpecialOffer.objects.all()
@@ -66,6 +85,7 @@ class SpecialOfferUpdateAPIView(UpdateAPIView):
 class BasketCreateAPIView(CreateAPIView):
     queryset =Basket.objects.all()
     serializer_class =BasketSerializer
+    permission_classes = [AllowAny]
 
 class SosialMediaUpdateAPIView(UpdateAPIView):
     queryset = SosialMedia.objects.all()

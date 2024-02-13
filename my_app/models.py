@@ -48,8 +48,8 @@ class Category(SlugMixin, DateMixin):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
-        super(MainDetails, self).save(*args, **kwargs)
+         self.slug = Generator.create_slug_shortcode(size=10, model_= Category)
+        super(Category, self).save(*args, **kwargs)
 
 
 
@@ -73,8 +73,8 @@ class Color(SlugMixin, DateMixin):
 
       def save(self, *args, **kwargs):
         if not self.slug:
-         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
-        super(MainDetails, self).save(*args, **kwargs)
+         self.slug = Generator.create_slug_shortcode(size=10, model_=Color)
+        super(Color, self).save(*args, **kwargs)
 
 
         
@@ -91,10 +91,10 @@ class Size(SlugMixin, DateMixin):
        verbose_name_plural = 'olculer'
 
 
-    # def save(self, *args, **kwargs):
-    #    if not self.slug:
-    #     self.slug = Generator.create_slug_shortcode(size=10, model_= Size)
-    #    super(Size, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+       if not self.slug:
+        self.slug = Generator.create_slug_shortcode(size=10, model_= Size)
+       super(Size, self).save(*args, **kwargs)
 
  
 
@@ -122,8 +122,8 @@ class Product(SlugMixin, DateMixin):
 
      def save(self, *args, **kwargs):
         if not self.slug:
-         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
-        super(MainDetails, self).save(*args, **kwargs)
+         self.slug = Generator.create_slug_shortcode(size=10, model_=Product)
+        super(Product, self).save(*args, **kwargs)
 
     
 
@@ -166,8 +166,8 @@ class Contact(SlugMixin, DateMixin):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
-        super(MainDetails, self).save(*args, **kwargs)
+         self.slug = Generator.create_slug_shortcode(size=10, model_=Contact)
+        super(Contact, self).save(*args, **kwargs)
 
 
 
@@ -194,8 +194,8 @@ class Checkout(SlugMixin, DateMixin):
 
        def save(self, *args, **kwargs):
         if not self.slug:
-         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
-        super(MainDetails, self).save(*args, **kwargs)
+         self.slug = Generator.create_slug_shortcode(size=10, model_= Checkout)
+        super(Checkout, self).save(*args, **kwargs)
         
 
  
@@ -213,8 +213,8 @@ class ProductImage(SlugMixin, DateMixin):
 
        def save(self, *args, **kwargs):
         if not self.slug:
-         self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
-        super(MainDetails, self).save(*args, **kwargs)
+         self.slug = Generator.create_slug_shortcode(size=10, model_= ProductImage)
+        super(ProductImage, self).save(*args, **kwargs)
 
 
 
