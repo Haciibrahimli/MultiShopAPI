@@ -80,21 +80,21 @@ class Color(SlugMixin, DateMixin):
         
 
 class Size(SlugMixin, DateMixin):
-      name = models.TextField(verbose_name = 'mehsulun olcusu')
+    name = models.TextField(verbose_name = 'mehsulun olcusu')
 
-      def __str__(self):
-        return self.name
+    def __str__(self):
+       return self.name
 
-      class Meta:
+    class Meta:
        ordering = ('-created_at',)
        verbose_name = 'olcu'
        verbose_name_plural = 'olculer'
 
 
-    #    def save(self, *args, **kwargs):
-    #     if not self.slug:
-    #      self.slug = Generator.create_slug_shortcode(size=10, model_=MainDetails)
-    #     super(MainDetails, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #    if not self.slug:
+    #     self.slug = Generator.create_slug_shortcode(size=10, model_= Size)
+    #    super(Size, self).save(*args, **kwargs)
 
  
 
